@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pm2": "pm2 start index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/mengxxSELF/koa-jwt/issues"
   },
-  "homepage": "https://github.com/mengxxSELF/koa-jwt#readme"
+  "homepage": "https://github.com/mengxxSELF/koa-jwt#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.3.0",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^3.3.2",
+    "koa-router": "^7.4.0"
+  }
 }
