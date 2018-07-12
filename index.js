@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const jwtKoa = require('koa-jwt')
 const app = new Koa()
 const router = new Router()
+const moment = require('moment')
 const SECRET = 'girl'
 app.use(bodyParser())
 app.use(function(ctx, next){
@@ -23,11 +24,13 @@ app.use(
     path: [/\/login/] // 数组中的路径不需要通过jwt验证
   })
 )
+
 router.get('/login', async (ctx) => {
   let token = jwt.sign({
-    name: 'dva'
+    name: 'dva',
+    exp: 1531410000 // 设置 token 过期时间
   }, SECRET)
-  // console.log(token, 'token')
+  console.log(token, 'token')
   ctx.body = {
     token
   }
@@ -38,8 +41,22 @@ router.get('/try', async (ctx) => {
   token = token.slice(7)
   // console.log(token, 'token');
   let result = jwt.verify(token, SECRET)
+
+  let {exp} = result
+
+  // 判断 token 是否快要失效时 更新token
+  let newToken = null
+  let willInvalid = moment().add(10, 'minutes').unix()
+  if (willInvalid > exp) {
+     newToken = jwt.sign({
+      name: 'dva',
+      // exp: 1531410000 // 设置 token 过期时间
+    }, SECRET)
+  }
+
   ctx.body = {
-    result
+    result,
+    newToken
   }
 })
 
