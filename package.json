@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mengxxSELF/koa-jwt#readme",
   "dependencies": {
+    "base64url": "^3.0.0",
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
